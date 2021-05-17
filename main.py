@@ -17,14 +17,13 @@ csvFile = open('output/result.csv', 'a', newline="")
 csvWriter = csv.writer(csvFile)
 
 # Query Params
-queryString = "#palestine exclude:retweets exclude:replies"
+queryString = "oxygen needed urgent exclude:retweets exclude:replies"
 limits = 20
 
 
 # Send query and write to CSV
 for tweet in tweepy.Cursor(api.search, q=queryString, lang="en", result_type = "recent").items(limits):
-    # csvWriter.writerow([tweet.created_at, tweet.user.name.encode('utf-8'), tweet.text.encode('utf-8')])
-    print(tweet.user.name)
+    csvWriter.writerow([tweet.created_at, tweet.user.name.encode('utf-8'), tweet.user.screen_name.encode('utf-8'), tweet.text.encode('utf-8')])
 
 # Close the file
 csvFile.close()
